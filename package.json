@@ -1,0 +1,38 @@
+{
+  "name": "balbos-browser",
+  "version": "1.0.1",
+  "description": "Private local browser",
+  "author": "Balbos",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win"
+  },
+  "build": {
+    "appId": "com.balbos.browser",
+    "productName": "Balbos",
+    "forceCodeSigning": false,
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "renderer.js",
+      "package.json"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "@ghostery/adblocker-electron": "^2.14.1",
+    "mica-electron": "^1.5.17",
+    "node-fetch": "^3.3.2"
+  }
+}

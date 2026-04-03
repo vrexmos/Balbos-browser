@@ -796,11 +796,20 @@ ipcRenderer.on('download-done', (e, downloadInfo) => {
 function init() {
   applyTheme()
   ipcRenderer.send('set-adblocker', settings.adBlockerEnabled)
-  createTab()
+  
+  // Ensure only one tab at startup
+  if (tabs.length === 0) {
+    createTab()
+  } else if (tabs.length > 1) {
+    // Keep only the first tab if multiple were created
+    tabs = [tabs[0]]
+    renderTabs()
+    switchTab(tabs[0].id)
+  }
   
   // Check if settings has homepage and navigate
-  if (settings.homepageUrl) {
-    navigate(settings.homepageUrl)
+  if (settings.homepageUrl && activeTabId) {
+    navigate(settings.homepageUrl, activeTabId)
   }
 }
 
